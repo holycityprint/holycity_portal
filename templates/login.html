@@ -14,9 +14,9 @@
       <div class="card-body">
         <h4 class="text-center mb-3">Login Portal</h4>
 
-        <!-- 🧩 Form login dengan CSRF token -->
+        <!-- 🧩 Form login dengan hidden CSRF token -->
         <form method="POST" action="{{ url_for('login') }}">
-          {{ csrf_token() }}
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <div class="form-group mb-2">
             <input
               type="text"
