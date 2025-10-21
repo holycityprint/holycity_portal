@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Purchasing{% endblock %}
+{% block content %}
+<h3 class="fw-bold text-primary mb-3">
+  <i class="bi bi-speedometer2 me-2"></i>Dashboard Purchasing
+</h3>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card text-center p-3 border-0 shadow-sm">
+      <div class="fw-semibold text-muted">Supplier Aktif</div>
+      <div class="fs-5 fw-bold text-primary">{{ summary.supplier }}</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center p-3 border-0 shadow-sm">
+      <div class="fw-semibold text-muted">PO Terbuka</div>
+      <div class="fs-5 fw-bold text-success">{{ summary.open_po }}</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center p-3 border-0 shadow-sm">
+      <div class="fw-semibold text-muted">Barang Diterima (Hari Ini)</div>
+      <div class="fs-5 fw-bold text-info">{{ summary.received_today }}</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center p-3 border-0 shadow-sm">
+      <div class="fw-semibold text-muted">Nilai PO Bulan Ini</div>
+      <div class="fs-6 fw-bold">Rp {{ "{:,.0f}".format(summary.month_value) }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="card p-3 shadow-sm border-0">
+  <p class="text-muted mb-0">
+    Gunakan menu di atas untuk mengelola Supplier, Purchase Orders, dan Penerimaan Barang.
+  </p>
+</div>
+{% endblock %}
