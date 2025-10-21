@@ -20,7 +20,8 @@ from routes.absensi import absensi_bp
 from routes.hrd import hrd_bp
 from routes.accounting import accounting_bp
 from blueprints.marketing import marketing_bp
-from routes.purchasing import purchasing_bp 
+from routes.purchasing import purchasing_bp
+
 
 def create_app():
     """Application Factory utama Holycity Portal."""
@@ -31,6 +32,15 @@ def create_app():
         template_folder="../templates"
     )
     app.config.from_object(Config)
+
+    # ✅ Tambahan konfigurasi agar CSRF dan cookie bekerja lancar di hosting HTTPS (Render, dsb.)
+    app.config.update(
+        WTF_CSRF_TIME_LIMIT=None,
+        WTF_CSRF_SSL_STRICT=False,   # Jangan paksa verifikasi SSL CSRF
+        SESSION_COOKIE_SECURE=False, # Izinkan cookie diakses proxy Render
+        REMEMBER_COOKIE_SECURE=False,
+        SESSION_COOKIE_SAMESITE="Lax"
+    )
 
     # Jalankan mode debug bila di development
     if app.config.get("FLASK_ENV") == "development":
