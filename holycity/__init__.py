@@ -33,13 +33,13 @@ def create_app():
     )
     app.config.from_object(Config)
 
-    # ✅ Tambahan konfigurasi agar CSRF dan cookie bekerja lancar di hosting HTTPS (Render, dsb.)
+    # ✅ Tambahan konfigurasi agar CSRF dan cookie berfungsi di hosting (Render/HTTPS)
     app.config.update(
-        WTF_CSRF_TIME_LIMIT=None,
-        WTF_CSRF_SSL_STRICT=False,   # Jangan paksa verifikasi SSL CSRF
-        SESSION_COOKIE_SECURE=False, # Izinkan cookie diakses proxy Render
-        REMEMBER_COOKIE_SECURE=False,
-        SESSION_COOKIE_SAMESITE="Lax"
+        WTF_CSRF_TIME_LIMIT=None,      # Token tidak kedaluwarsa cepat
+        WTF_CSRF_SSL_STRICT=False,     # Tidak paksa strict SSL validation
+        SESSION_COOKIE_SECURE=False,   # Izinkan cookie dibaca proxy Render
+        REMEMBER_COOKIE_SECURE=False,  # Untuk remember-login
+        SESSION_COOKIE_SAMESITE="Lax", # Hindari CSRF lintas domain
     )
 
     # Jalankan mode debug bila di development
